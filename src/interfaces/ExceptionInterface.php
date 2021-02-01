@@ -6,11 +6,13 @@ namespace src\interfaces;
 
 use http\Exception;
 
-interface ExceptionInterface extends \http\Exception
+interface ExceptionInterface extends Exception
 {
     public function activate($interfaceName);
     public function getListOfActivatedInterfaces();
     public function createExceptionInstance($exId, $exMsg, $exType);
+    //
+    public function fromValue($vlaue);
 }
 
 abstract class implementInterface implements ExceptionInterface {
@@ -21,6 +23,8 @@ abstract class implementInterface implements ExceptionInterface {
     private $eId;
     private $eMsg;
     private $eType;
+    //
+    private $fValue;
 
     public function activate($interfaceName)
     {
@@ -42,5 +46,9 @@ abstract class implementInterface implements ExceptionInterface {
         $this->eId = $exId;
         $this->eMsg = $exMsg;
         $this->eType = $exType;
+    }
+
+    public function fromValue($value){
+        $this->fValue = $value;
     }
 }
